@@ -2,9 +2,7 @@ package com.macheng.messager.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @XmlRootElement
 public class Message {
@@ -13,6 +11,7 @@ public class Message {
     private Date createdDate;
     private String author;
     private Map<Long, Comment> comments;
+    private List<Link> links;
 
     public Message() {
     }
@@ -23,6 +22,7 @@ public class Message {
         this.createdDate = new Date();
         this.author = author;
         this.comments = new HashMap<Long, Comment>();
+        this.links = new ArrayList<Link>();
     }
 
     public long getId() {
@@ -66,4 +66,18 @@ public class Message {
         this.comments = comments;
     }
 
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
+    public void addLink(String url, String rel) {
+        Link link = new Link();
+        link.setLink(url);
+        link.setRel(rel);
+        links.add(link);
+    }
 }
